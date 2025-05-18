@@ -11,7 +11,7 @@ INCLUDE = -I.
 LIBS = -L. 
 
 # dont forget to use src/ specialy to not touch other .c files in ./
-SRC = $(wildcard src/*.c) $(wildcard src/*/*.c)
+SRC = $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c) $(wildcard src/*/*/*/*.c)
 OBJ = $(SRC:.c=.o)
 
 all: $(TARGET) 
