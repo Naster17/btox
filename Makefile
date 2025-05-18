@@ -5,7 +5,7 @@ DEL = rm -rf
 COLOR_MAKE=y
 
 # -pedantic
-CFLAGS =
+CFLAGS = -pedantic
 INCLUDE = -I.
 # for feature static libs paths and -ltoxcore ...
 LIBS = -L. 

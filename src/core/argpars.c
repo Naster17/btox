@@ -40,17 +40,10 @@ void argsparse(int argc, char *argv[])
     {
         for (int j = 0; j < (sizeof(args) / sizeof(args[0])) - 1; j++)
         {
-            printf("%s %s\n", args[j].flag, args[j].s_flag);
-            args[j].func(0, argv);
+            if (!sc(argv[i], args[j].flag) || !sc(argv[i], args[j].s_flag))
+            {
+                args[j].func(0, argv);
+            }
         }
-        // // printf("%s\n", argv[i]);
-        // if (!sc(argv[i], "--help") || !sc(argv[i], "-h"))
-        // {
-        //     help();
-        // }
-        // else if (!sc(argv[i], "--save"))
-        // {
-        //     printf("Save\n");
-        // }
     }
 }
