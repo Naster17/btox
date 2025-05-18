@@ -6,8 +6,5 @@ int main(int argc, char *argv[])
 {
     argsparse(argc, argv);
 
-    // to trace if program crash
-    printf("\n### END ###\n");
-
     return EXIT_SUCCESS;
 }
