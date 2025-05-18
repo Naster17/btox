@@ -6,7 +6,7 @@ int main()
     char msg[] = "Just a string";
     int row, col;
 
-    initscr();	
+    initscr();
     getmaxyx(stdscr, row, col);
     mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
 
@@ -14,6 +14,11 @@ int main()
     printw("Try resizing your window(if possible) and then run this program again");
     refresh();
     getch();
+
+    clear();
+    printw("suck some dick!");
+    getch();
+
     endwin();
 
     return 0;
