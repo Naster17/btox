@@ -8,7 +8,7 @@ int main()
     raw();
     keypad(stdscr, TRUE);
     noecho();
-
+    addstr("Gay\n");
     printw("Type any character, or 'q' to quit the program!\n");
 
     ch = getch();
