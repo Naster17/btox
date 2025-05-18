@@ -1,20 +1,29 @@
 #include "core.h"
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 // short version for if
 #define sc strcmp
+void help(int pos, char **argv);
+bool notarg(const char *s);
 
-struct Args
+static struct Args args[2] = {{"--help", "-h", "Show this message", 0, help}};
+
+void argsparse(int argc, char *argv[])
 {
-    char flag[32];                       // main flag
-    char s_flag[16];                     // if hase short version arg
-    char desc[128];                      // description
-    int req_args;                        // number of required arguments
-    void (*func)(int pos, char *argv[]); // function
-};
+    for (int i = 0; i < argc; i++)
+    {
+        for (int j = 0; j < (sizeof(args) / sizeof(args[0])) - 1; j++)
+        {
+            // if provided flag/arg in args
+            if (!sc(argv[i], args[j].flag) || !sc(argv[i], args[j].s_flag))
+            {
+                args[j].func(0, argv); // execute function
+            }
+        }
+    }
+}
 
 bool notarg(const char *s)
 {
@@ -26,24 +35,12 @@ bool notarg(const char *s)
 
 void help(int pos, char **argv)
 {
-    printf("Args:\n"
-           "  --help\tTo see this message\n"
-           "  --save\tUse save file\n");
-}
 
-struct Args args[2] = {{"--help", "-h", "Help menu", 0, help}};
-
-void argsparse(int argc, char *argv[])
-{
-
-    for (int i = 0; i < argc; i++)
+    printf("\nArgs:\n");
+    for (int j = 0; j < (sizeof(args) / sizeof(args[0])) - 1; j++)
     {
-        for (int j = 0; j < (sizeof(args) / sizeof(args[0])) - 1; j++)
-        {
-            if (!sc(argv[i], args[j].flag) || !sc(argv[i], args[j].s_flag))
-            {
-                args[j].func(0, argv);
-            }
-        }
+        printf("  %s %s\t%s\n", args[j].flag, args[j].s_flag, args[j].desc);
     }
+    //        "  --help\tTo see this message\n"
+    //        "  --save\tUse save file\n");
 }
