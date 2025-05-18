@@ -1,21 +1,26 @@
 #include "core.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-struct Args
-{
-    char flag[16];
-    int req_args;
-    void (*func)(void *data);
-};
+// short version for if
+#define sc strcmp
 
-void help(void *data)
+bool notarg(const char *s)
 {
-    printf("HELP MENU\n");
+    if (strstr("-", s) == NULL)
+        return true;
+
+    return false;
 }
 
-#define sc strcmp 
+void help()
+{
+    printf("Args:\n"
+           "  --help\tTo see this message\n"
+           "  --save\tUse save file\n");
+}
 
 void argsparse(int argc, char *argv[])
 {
@@ -24,20 +29,11 @@ void argsparse(int argc, char *argv[])
         // printf("%s\n", argv[i]);
         if (!sc(argv[i], "--help") || !sc(argv[i], "-h"))
         {
-            help(NULL);
+            help();
         }
-        else if (strcmp(argv[i], "--save") == 0) {
+        else if (!sc(argv[i], "--save"))
+        {
             printf("Save\n");
         }
     }
 }
-// struct Args *init_args(int argc)
-// {
-//     struct Args *args = calloc(argc, sizeof(struct Args));
-//
-//     args[0].flag = "--help";
-//     args[0].req_args = 0;
-//     args[0].func = help;
-//
-//     return args;
-// }
