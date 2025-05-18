@@ -7,12 +7,15 @@ int main()
     int row, col;
 
     initscr();	
+    while (1) {
+    clear();
     getmaxyx(stdscr, row, col);
     mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
 
     mvprintw(row - 2, 0, "This screen has %d rows and %d columns\n", row, col);
     printw("Try resizing your window(if possible) and then run this program again");
     refresh();
+}
     getch();
     endwin();
 
