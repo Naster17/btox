@@ -2,7 +2,10 @@ TARGET = btox
 CC = gcc
 DEL = rm -rf
 
-CFLAGS = -pedantic
+COLOR_MAKE=y
+
+# -pedantic
+CFLAGS =
 INCLUDE = -I.
 # for feature static libs paths and -ltoxcore ...
 LIBS = -L. 
@@ -14,12 +17,29 @@ OBJ = $(SRC:.c=.o)
 all: $(TARGET) 
 
 $(TARGET): $(OBJ)
-	echo $(OBJ)
+ifeq ($(COLOR_MAKE), y)
+	@echo [LD] $(TARGET)
+	@$(CC) $(CFLAGS) $(LIBS) $^ -o $(TARGET)
+else
 	$(CC) $(CFLAGS) $(LIBS) $^ -o $(TARGET)
+endif
 
-%.o: %.c 
+%.o: %.c
+# ifeq and other is sensative to space use tab insted
+ifeq ($(COLOR_MAKE), y)
+	@echo [CC] $<
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
+else
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
+endif
 
 clean:
+ifeq ($(COLOR_MAKE), y)
+	@echo [RM] $(OBJ)
+	@echo [RM] $(TARGET)
+	@$(DEL) $(OBJ)
+	@$(DEL) $(TARGET)
+else
 	$(DEL) $(OBJ)
 	$(DEL) $(TARGET)
+endif
