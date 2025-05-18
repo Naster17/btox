@@ -25,4 +25,5 @@ int main()
     return 0;
 }
 
+// some dick
 // gcc tests/test.c -lncurses -lmenu
