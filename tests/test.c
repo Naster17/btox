@@ -1,24 +1,20 @@
 #include <ncurses.h>
+#include <string.h>
 
 int main()
 {
-    int ch;
+    char msg[] = "Just a string";
+    int row, col;
 
-    initscr();
-    raw();
-    keypad(stdscr, TRUE);
-    noecho();
-    addstr("Gay\n");
-    printw("Type any character, or 'q' to quit the program!\n");
+    initscr();	
+    getmaxyx(stdscr, row, col);
+    mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
 
-    ch = getch();
-
-    if (ch != 'q')
-    {
-        printw("You typed %c\n", ch);
-        getch();
-    }
-
+    mvprintw(row - 2, 0, "This screen has %d rows and %d columns\n", row, col);
+    printw("Try resizing your window(if possible) and then run this program again");
+    refresh();
+    getch();
     endwin();
+
     return 0;
 }
