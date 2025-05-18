@@ -38,7 +38,7 @@ void argsparse(int argc, char *argv[])
 
     for (int i = 0; i < argc; i++)
     {
-        for (int j = 0; j < sizeof(args) / sizeof(args[0]); j++)
+        for (int j = 0; j < (sizeof(args) / sizeof(args[0])) - 1; j++)
         {
             printf("%s %s\n", args[j].flag, args[j].s_flag);
             args[j].func(0, argv);
