@@ -1,6 +1,7 @@
 # Custom
 btox
 compile_commands.json
+.cache
 
 # Prerequisites
 *.d
