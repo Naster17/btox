@@ -1,5 +1,6 @@
 # Custom
 btox
+compile_commands.json
 
 # Prerequisites
 *.d
