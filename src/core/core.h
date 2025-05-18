@@ -12,6 +12,6 @@ struct Args
     void (*func)(int pos, int n_args, char *argv[]); // function
 };
 
-void argsparse(int argc, char *argv[]);
+void argparse(int argc, char *argv[]);
 
 #endif // !MCORE_H

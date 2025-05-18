@@ -1,8 +1,9 @@
 #include <ncurses.h>
 
-int main() {
+int main()
+{
     int ch;
-    
+
     initscr();
     raw();
     keypad(stdscr, TRUE);
@@ -12,15 +13,16 @@ int main() {
 
     ch = getch();
 
-    if (ch != 'q') {
+    if (ch != 'q')
+    {
         printw("You typed %c\n", ch);
         getch();
     }
-    else printw("Quite...");
+    else
+        printw("Quite...");
     endwin();
 
     return 0;
 }
-
 
 // gcc tests/test.c -lncurses -lmenu
