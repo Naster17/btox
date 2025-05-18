@@ -13,7 +13,7 @@ bool notarg(const char *s);
 static struct Args args[] = {{"--help", "-h", "Show this message", 0, help},
                              {"--file", "-f", "Path to file contain session", 1, load}};
 
-void argsparse(int argc, char *argv[])
+void argparse(int argc, char *argv[])
 {
     for (int i = 0; i < argc; i++)
     {
@@ -43,6 +43,7 @@ void help(int pos, int n_args, char **argv)
     {
         printf("  %s %-5s %-20s\n", args[j].flag, args[j].s_flag, args[j].desc);
     }
+    printf("\n");
 }
 
 void load(int pos, int n_args, char **argv)
