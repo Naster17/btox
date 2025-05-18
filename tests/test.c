@@ -18,12 +18,7 @@ int main()
         printw("You typed %c\n", ch);
         getch();
     }
-    else
-        printw("Quite...");
-    endwin();
 
+    endwin();
     return 0;
 }
-
-// some dick
-// gcc tests/test.c -lncurses -lmenu
