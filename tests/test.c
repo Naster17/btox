@@ -19,11 +19,6 @@ int main()
     refresh();
 }
     getch();
-
-    clear();
-    printw("suck some dick!");
-    getch();
-
     endwin();
 
     return 0;
