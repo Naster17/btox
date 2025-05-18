@@ -9,6 +9,8 @@ int main()
     initscr();	
     while (1) {
     clear();
+    initscr();
+
     getmaxyx(stdscr, row, col);
     mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
 
@@ -17,6 +19,11 @@ int main()
     refresh();
 }
     getch();
+
+    clear();
+    printw("suck some dick!");
+    getch();
+
     endwin();
 
     return 0;
