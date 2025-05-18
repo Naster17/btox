@@ -22,7 +22,7 @@ void argparse(int argc, char *argv[])
             // if provided flag/arg in args
             if (!sc(argv[i], args[j].flag) || !sc(argv[i], args[j].s_flag))
             {
-                args[j].func(j, args[j].n_args, argv); // execute function
+                args[j].func(i, args[j].n_args, argv); // execute function
             }
         }
     }
