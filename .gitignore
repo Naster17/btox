@@ -2,7 +2,7 @@
 btox
 compile_commands.json
 .cache
-
+.clang-format
 # Prerequisites
 *.d
 
