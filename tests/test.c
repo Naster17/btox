@@ -6,18 +6,24 @@ int main()
     char msg[] = "Just a string";
     int row, col;
 
-    initscr();	
-    while (1) {
-    clear();
     initscr();
+    // while (1)
+    // {
+        // clear();
+        initscr();
+        // getmaxex() is a func to get max horizontal and vertical size of window...
+        getmaxyx(stdscr, row, col);
+        // equal to move(row / 2, (col - strlen(msg)) / 2); printw("%s", msg); in one func.
+        mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
+        // 
+        // All this func take y, x cordinate NOT x, y. It's a common mistake by beginners.
+        // 
+        mvprintw(row - 2, 0, "This screen has %d rows and %d columns\n", row, col);
+        printw("Try resizing your window(if possible) and then run this program again");
 
-    getmaxyx(stdscr, row, col);
-    mvprintw(row / 2, (col - strlen(msg)) / 2, "%s", msg);
+        refresh();
+    // }
 
-    mvprintw(row - 2, 0, "This screen has %d rows and %d columns\n", row, col);
-    printw("Try resizing your window(if possible) and then run this program again");
-    refresh();
-}
     getch();
     endwin();
 
