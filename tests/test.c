@@ -5,9 +5,6 @@ int main()
 {
     char msg[] = "Just a string";
     int row, col;
-
-    initscr();
-<<<<<<< HEAD
     while (1)
     {
         clear();
@@ -20,7 +17,6 @@ int main()
         printw("Try resizing your window(if possible) and then run this program again");
         refresh();
     }
-=======
     // while (1)
     // {
         // clear();
@@ -38,7 +34,6 @@ int main()
         refresh();
     // }
 
->>>>>>> c033e74 (add inputFunc.c, and using user input ncurses..)
     getch();
     endwin();
 
