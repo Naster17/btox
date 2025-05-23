@@ -22,4 +22,7 @@ typedef struct DHT_node
 
 void argparse(int argc, char *argv[]);
 
+// tox
+void bootstrap(Tox *tox);
+
 #endif // !MCORE_H

@@ -8,7 +8,6 @@
 
 void help(int pos, int n_args, char **argv);
 void load(int pos, int n_args, char **argv);
-bool notarg(const char *s);
 
 static struct Args args[] = {{"--help", "-h", "Show this message", 0, help},
                              {"--file", "-f", "Path to file contain session", 1, load}};
@@ -28,12 +27,12 @@ void argparse(int argc, char *argv[])
     }
 }
 
-bool notarg(const char *s)
+bool isarg(const char *s)
 {
-    if (s && strstr("-", s) == NULL)
-        return true;
+    if (s && s[0] == '-')
+        return false;
 
-    return false;
+    return true;
 }
 
 void help(int pos, int n_args, char **argv)
@@ -46,8 +45,18 @@ void help(int pos, int n_args, char **argv)
     printf("\n");
 }
 
+extern char *data_file;
+
 void load(int pos, int n_args, char **argv)
 {
-    printf("Loading from file...\n");
-    printf("Args: %s\n", argv[pos + n_args]);
+    if (isarg(argv[pos + n_args]))
+    {
+        data_file = strdup(argv[pos + n_args]);
+        printf("Session file: %s\n", data_file);
+    }
+    else
+    {
+        printf("Specify tox save data file!\n");
+        printf("Session file: %s\n", data_file);
+    }
 }

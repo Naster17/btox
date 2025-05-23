@@ -8,7 +8,7 @@ COLOR_MAKE=y
 CFLAGS = -pedantic
 INCLUDE = -I.
 # for feature static libs paths and -ltoxcore ...
-LIBS = -L. 
+LIBS = -ltoxcore -lsodium 
 
 # dont forget to use src/ specialy to not touch other .c files in ./
 SRC = $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c) $(wildcard src/*/*/*/*.c)
@@ -19,9 +19,9 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 ifeq ($(COLOR_MAKE), y)
 	@echo [LD] $(TARGET)
-	@$(CC) $(CFLAGS) $(LIBS) $^ -o $(TARGET)
+	@$(CC) $(CFLAGS) $^ $(LIBS) -o $(TARGET)
 else
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $(TARGET)
+	$(CC) $(CFLAGS) $^ $(LIBS) -o $(TARGET)
 endif
 
 %.o: %.c
