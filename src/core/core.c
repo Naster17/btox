@@ -1,9 +1,15 @@
 // John Pena - 18.05.2025 by Naster
 #include "core.h"
-#include <sodium/utils.h>
-#include <tox/tox.h>
 
-char *data_file = "savedata.tox";
+#include <sodium/utils.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <tox/tox.h>
+#include <unistd.h>
+
+char *data_file = "session.tox";
 
 void bootstrap(Tox *tox)
 {
@@ -24,4 +30,40 @@ void bootstrap(Tox *tox)
         sodium_hex2bin(key_bin, sizeof(key_bin), nodes[i].key_hex, sizeof(nodes[i].key_hex) - 1, NULL, NULL, NULL);
         tox_bootstrap(tox, nodes[i].ip, nodes[i].port, key_bin, NULL);
     }
+}
+
+Tox *create_tox(void)
+{
+    Tox *tox;
+
+    struct Tox_Options options;
+
+    tox_options_default(&options);
+
+    FILE *f = fopen(data_file, "rb");
+    if (f)
+    {
+        fseek(f, 0, SEEK_END);
+        long fsize = ftell(f);
+        fseek(f, 0, SEEK_SET);
+
+        uint8_t *savedata = malloc(fsize);
+
+        fread(savedata, fsize, 1, f);
+        fclose(f);
+
+        options.savedata_type = TOX_SAVEDATA_TYPE_TOX_SAVE;
+        options.savedata_data = savedata;
+        options.savedata_length = fsize;
+
+        tox = tox_new(&options, NULL);
+
+        free(savedata);
+    }
+    else
+    {
+        tox = tox_new(&options, NULL);
+    }
+
+    return tox;
 }
